@@ -1,0 +1,7 @@
+config.yaml
+*.oga
+*.mp3
+.venv/
+.idea/
+test
+test*
