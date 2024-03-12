@@ -1,11 +1,13 @@
 from pydantic import BaseModel, Field
 
+
 class Chat(BaseModel):
     id: int
     first_name: str = None
     last_name: str = None
     username: str = None
     type: str
+
 
 class Photo(BaseModel):
     file_id: str
@@ -23,12 +25,14 @@ class FromF(BaseModel):
     username: str = None
     language_code: str = None
 
+
 class Thumb(BaseModel):
     file_id: str
     file_unique_id: str
     file_size: int
     width: int
     height: int
+
 
 class Document(BaseModel):
     file_name: str
@@ -49,6 +53,7 @@ class Video(BaseModel):
     file_id: str
     file_unique_id: str
     file_size: int
+
 
 class Animation(BaseModel):
     file_name: str
@@ -85,6 +90,7 @@ class Voice(BaseModel):
     file_unique_id: str
     file_size: int
 
+
 class ReplayMessage(BaseModel):
     message_id: int
     fromF: FromF = Field(alias='from')
@@ -99,11 +105,11 @@ class ReplayMessage(BaseModel):
     forward_date: int = None
     entities: list = None
     caption_entities: list = None
-    media_group_id: int = None # если это группа фотографий, приходят они двумя разными запросами, но это айди один.
-    animation: Animation = None # если это гифка пришла, как документ но с указанием анимации
-    location: Location = None # обработка локации в сообщении, обычно больше ничего и нет, но всё возможно
-    audio: Audio = None # обработка песен
-    voice: Voice = None # обработка голосового сообщения
+    media_group_id: int = None  # если это группа фотографий, приходят они двумя разными запросами, но это айди один.
+    animation: Animation = None  # если это гифка пришла, как документ но с указанием анимации
+    location: Location = None  # обработка локации в сообщении, обычно больше ничего и нет, но всё возможно
+    audio: Audio = None  # обработка песен
+    voice: Voice = None  # обработка голосового сообщения
 
 
 class Message(BaseModel):
@@ -116,16 +122,16 @@ class Message(BaseModel):
     document: Document = None
     video: Video = None
     caption: str = None
-    sticker: dict = None # возможно и не нужно
+    sticker: dict = None  # возможно и не нужно
     forward_from: FromF = None
     forward_date: int = None
     entities: list = None
     caption_entities: list = None
-    media_group_id: int = None # если это группа фотографий, приходят они двумя разными запросами, но это айди один.
-    animation: Animation = None # если это гифка пришла, как документ но с указанием анимации
-    location: Location = None # обработка локации в сообщении, обычно больше ничего и нет, но всё возможно
-    audio: Audio = None # обработка песен
-    voice: Voice = None # обработка голосового сообщения
+    media_group_id: int = None  # если это группа фотографий, приходят они двумя разными запросами, но это айди один.
+    animation: Animation = None  # если это гифка пришла, как документ но с указанием анимации
+    location: Location = None  # обработка локации в сообщении, обычно больше ничего и нет, но всё возможно
+    audio: Audio = None  # обработка песен
+    voice: Voice = None  # обработка голосового сообщения
     reply_to_message: ReplayMessage = None
 
 
