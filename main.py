@@ -13,7 +13,9 @@ from models import Transcriptor, AudioLangClassifier, process_audio
 import numpy as np
 import torch
 
-curr_number = [np.random.randint(1, 100)]
+
+LIMIT_NUMBER = 20
+curr_number = [np.random.randint(1, LIMIT_NUMBER)]
 
 lang_clf = AudioLangClassifier()
 transcriptor = Transcriptor()
@@ -117,19 +119,25 @@ async def validate(curr_lang: str, chat_id: int, waveform: torch.Tensor, sample_
         * sample_rate (int): The sample rate of the audio waveform.
     """
     if curr_lang != 'French':
-        bot_speech = f'Sorry, but you spoke kind a {curr_lang}. Please, speak French.'
+        bot_speech = f'''
+        Sorry, but you spoke kind a {curr_lang}. Please, speak French.Current number: {curr_number}
+        '''
         await bot_says(bot_speech, chat_id)
 
     elif curr_lang == 'French':
         curr_transcription = transcriptor.get_transcription(waveform, sample_rate)
 
         if curr_transcription.find(f'{curr_number[0]}') == -1:
-            bot_speech = f'Try again! Your answer is: {curr_transcription}'
+            bot_speech = f'''
+            Try again! Your answer is: {curr_transcription} Current number: {curr_number}
+            '''
             await bot_says(bot_speech, chat_id)
 
         else:
-            curr_number[0] = np.random.randint(1, 100)
-            bot_speech = f'Nice!'
+            curr_number[0] = np.random.randint(1, LIMIT_NUMBER)
+            bot_speech = f'''
+            Nice! Current number: {curr_number}
+            '''
             await bot_says(bot_speech, chat_id)
 
 
